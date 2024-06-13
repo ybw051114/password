@@ -5,9 +5,24 @@
 <title>菜鸟教程(runoob.com)</title>
 <script>
 function displayDate(){
-	X=document.getElementById('password').value
-	Y=document.getElementById('stri').value
-	document.getElementById("demo").innerHTML=X+Y;
+	X=document.getElementById('password').value;
+	Y=document.getElementById('stri').value;
+	var Z=Number(X),mod=998244353;
+	for(int i=0;i<Y.length;i++)
+		Z=(Z*233+Y.charCodeAt(i))%mod;
+	var T="";
+	
+	for (int i = 0; i < 1; i++)
+	T=T+String.fromCharCode(Z % 26 + 'A'), Z = Z * Z % mod;
+	for (int i = 0; i < 3; i++)
+	T=T+ String.fromCharCode(Z % 26 + 'a'), Z = Z * Z % mod;
+	if (Y == "12306")
+	T=T+ "_";
+	else
+	T=T+ '=';
+	for (int i = 0; i < 6; i++)
+	T=T+ String.fromCharCode(Z % 10+'0'), Z = Z * Z % mod;
+	document.getElementById("demo").innerHTML=T;
 }
 </script>
 </head>
