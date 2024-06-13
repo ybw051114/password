@@ -4,26 +4,36 @@
 <meta charset="utf-8">
 <title>菜鸟教程(runoob.com)</title>
 <script>
-function displayDate(){
-	X=document.getElementById('password').value;
-	Y=document.getElementById('stri').value;
-	var Z=Number(X),mod=998244353;
-	for(int i=0;i<Y.length;i++)
-		Z=(Z*233+Y.charCodeAt(i))%mod;
-	var T="";
-	
-	for (int i = 0; i < 1; i++)
-	T=T+String.fromCharCode(Z % 26 + 'A'), Z = Z * Z % mod;
-	for (int i = 0; i < 3; i++)
-	T=T+ String.fromCharCode(Z % 26 + 'a'), Z = Z * Z % mod;
-	if (Y == "12306")
-	T=T+ "_";
-	else
-	T=T+ '=';
-	for (int i = 0; i < 6; i++)
-	T=T+ String.fromCharCode(Z % 10+'0'), Z = Z * Z % mod;
-	document.getElementById("demo").innerHTML=T;
-}
+		function solve(num){
+			var nn=0,mod=998244353,cnt=num;
+			while(cnt)
+			{
+				if(cnt%2==1) nn=(nn+num)%mod,cnt=cnt-1;
+				num=(num+num)%mod;
+				cnt=cnt/2;
+			}
+			return nn;
+		}
+		function displayDate() {
+			X = document.getElementById('password').value;
+			Y = document.getElementById('stri').value;
+			 Z = Number(X), mod = 998244353;
+			for (var i = 0; i < Y.length; i++)
+				Z = (Z * 233 + Y.charCodeAt(i)) % mod;
+			 T = "";
+			for (var i = 0; i < 1; i++)
+				T = T + String.fromCharCode(Z % 26 + 65), Z = solve(Z);
+			for (var i = 0; i < 3; i++)
+				T = T + String.fromCharCode(Z % 26 + 97), Z = solve(Z);
+			var TT=Z;
+			if (Y == "12306")
+				T = T + "_";
+			else
+				T = T + '=';
+			for (var i = 0; i < 6; i++)
+				T = T + String.fromCharCode(Z % 10 + 48), Z = solve(Z);
+			document.getElementById("demo").innerHTML = T;
+		}
 </script>
 </head>
 <body>
